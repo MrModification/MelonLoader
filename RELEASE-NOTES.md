@@ -20,6 +20,7 @@
 * Fixed an issue with Melon Subfolder Parent Context checks using an incorrect ScanType
 * Implemented MelonInfoAttribute.SystemType Validation to prevent infinite loop during Melon Instantiation
 * Fixed an issue with Infinite Loops from RottenMelon Instantiation calling MelonAssembly.LoadMelonAssembly
+* Updated Cpp2IL to 2022.1.0-pre-release.20
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)
