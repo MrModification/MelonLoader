@@ -277,9 +277,23 @@ namespace MelonLoader
 
 
             // \/ Default resolver \/
+            var baseType = typeof(MelonBase);
             var info = SafeGetAttribute<MelonInfoAttribute>(true);
-            if (info != null && info.SystemType != null && info.SystemType.IsSubclassOf(typeof(MelonBase)))
+            if ((info != null)
+                && (info.SystemType != null)
+                && info.SystemType.IsSubclassOf(baseType))
             {
+                var baseTypeMod = typeof(MelonMod);
+                var baseTypePlugin = typeof(MelonPlugin);
+                if ((info.SystemType == baseType)
+                    || (info.SystemType == baseTypeMod)
+                    || (info.SystemType == baseTypePlugin))
+                {
+                    rottenMelons.Add(new RottenMelon(info.SystemType, "Failed to create an instance of the Melon.", 
+                        $"{info.SystemType.FullName} cannot be used for MelonInfoAttribute.SystemType"));
+                    return;
+                }
+
                 MelonBase melon;
                 try
                 {
@@ -346,7 +360,7 @@ namespace MelonLoader
                         MelonLogger.Error($"Failed to load Melon '{r.type.FullName}': {r.errorMessage}");
                     else if (r.assembly != null)
                         MelonLogger.Error($"Failed to load Melon '{r.assembly.Assembly.GetName().Name}': {r.errorMessage}");
-                    if (r.exception != null)
+                    if (!string.IsNullOrEmpty(r.exception))
                         MelonLogger.Error(r.exception);
                 }
             }

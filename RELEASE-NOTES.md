@@ -18,6 +18,7 @@
 * Fixed an issue with empty strings in "PATH" Environment Variable causing crashes
 * Fixed an issue with exposed Melon Folder Exclusion API not working correctly for Plugins
 * Fixed an issue with Melon Subfolder Parent Context checks using an incorrect ScanType
+* Implemented MelonInfoAttribute.SystemType Validation to prevent infinite loop during Melon Instantiation
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)
