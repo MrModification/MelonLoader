@@ -22,7 +22,7 @@ using Il2CppInterop.HarmonySupport;
 // Herp: This is extremely dirty way of implementing these fixes.
 //       These fixes are unfortunately required for Il2CppInterop Wrapper Generation to function correctly on a lot of Il2Cpp Games.
 //       DO NOT REMOVE!
-namespace MelonLoader.Fixes
+namespace MelonLoader.Fixes.Il2CppInterop
 {
     // fixes: https://github.com/BepInEx/Il2CppInterop/pull/103
     // fixes: https://github.com/BepInEx/Il2CppInterop/issues/135

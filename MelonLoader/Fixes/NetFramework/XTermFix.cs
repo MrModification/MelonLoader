@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 
-namespace MelonLoader.Fixes;
+namespace MelonLoader.Fixes.NetFramework;
 
 internal static class XTermFix
 {

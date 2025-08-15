@@ -48,7 +48,7 @@ namespace MelonLoader
             Fixes.UnhandledException.Install(AppDomain.CurrentDomain);
 
 #if NET35
-            Fixes.ServerCertificateValidation.Install();
+            Fixes.NetFramework.ServerCertificateValidation.Install();
 #endif
 
             Assertions.LemonAssertMapping.Setup();
@@ -65,7 +65,7 @@ namespace MelonLoader
             HarmonyInstance = new HarmonyLib.Harmony(Properties.BuildInfo.Name);
 
 #if !WINDOWS && !NET6_0_OR_GREATER
-            Fixes.XTermFix.Install();
+            Fixes.NetFramework.XTermFix.Install();
 #endif
 
 #if OSX
@@ -120,31 +120,34 @@ namespace MelonLoader
 
 #endif
 
-            Fixes.DetourContextDisposeFix.Install();
+            Fixes.MonoMod.DetourContextDisposeFix.Install();
 
 #if NET6_0_OR_GREATER
             // if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             //  NativeStackWalk.LogNativeStackTrace();
 
-            Fixes.DotnetAssemblyLoadContextFix.Install();
-            Fixes.DotnetModHandlerRedirectionFix.Install();
+            Fixes.Dotnet.DotnetAssemblyLoadContextFix.Install();
+            Fixes.Dotnet.DotnetModHandlerRedirectionFix.Install();
 #endif
 
             Fixes.ForcedCultureInfo.Install();
-            Fixes.InstancePatchFix.Install();
+            Fixes.Harmony.InstancePatchFix.Install();
+
+#if WINDOWS
             Fixes.ProcessFix.Install();
-
-#if NET6_0_OR_GREATER
-            Fixes.Il2CppInteropExceptionLog.Install();
-
-#if OSX
-            Fixes.Il2CppInteropMacFix.Install();
-            Fixes.NativeLibraryFix.Install();
 #endif
 
-            Fixes.Il2CppInteropFixes.Install();
+#if NET6_0_OR_GREATER
+            Fixes.Il2CppInterop.Il2CppInteropExceptionLog.Install();
 
-            Fixes.Il2CppICallInjector.Install();
+#if OSX
+            Fixes.Il2CppInterop.Il2CppInteropMacFix.Install();
+            Fixes.Dotnet.NativeLibraryFix.Install();
+#endif
+
+            Fixes.Il2CppInterop.Il2CppInteropFixes.Install();
+
+            Fixes.Il2CppInterop.Il2CppICallInjector.Install();
 #endif
 
             PatchShield.Install();
@@ -261,8 +264,8 @@ namespace MelonLoader
             bHapticsManager.Disconnect();
 
 #if NET6_0_OR_GREATER
-            Fixes.Il2CppInteropFixes.Shutdown();
-            Fixes.Il2CppICallInjector.Shutdown();
+            Fixes.Il2CppInterop.Il2CppInteropFixes.Shutdown();
+            Fixes.Il2CppInterop.Il2CppICallInjector.Shutdown();
 #endif
 
             Thread.Sleep(200);
