@@ -289,8 +289,7 @@ namespace MelonLoader
                     || (info.SystemType == baseTypeMod)
                     || (info.SystemType == baseTypePlugin))
                 {
-                    rottenMelons.Add(new RottenMelon(info.SystemType, "Failed to create an instance of the Melon.", 
-                        $"{info.SystemType.FullName} cannot be used for MelonInfoAttribute.SystemType"));
+                    rottenMelons.Add(new RottenMelon(Assembly, $"{info.SystemType.FullName} cannot be used for MelonInfoAttribute.SystemType"));
                     return;
                 }
 
