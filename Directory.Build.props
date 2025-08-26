@@ -26,6 +26,7 @@
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+        <RestoreAdditionalProjectSources>https://nuget.bepinex.dev/v3/index.json</RestoreAdditionalProjectSources>
     </PropertyGroup>
 	
 	<!--
@@ -41,7 +42,7 @@
         <AssetToolsVersion>3.0.0-preview3</AssetToolsVersion>
         <AssetRipperVersion>3.2.0</AssetRipperVersion>
         <AsmResolverVersion>6.0.0-beta.3</AsmResolverVersion>
-        <Il2CppInteropVersion>1.5.0-ci.625</Il2CppInteropVersion>
+        <Il2CppInteropVersion>1.5.0-ci.643</Il2CppInteropVersion>
 	</PropertyGroup>
 	
 	<!--
