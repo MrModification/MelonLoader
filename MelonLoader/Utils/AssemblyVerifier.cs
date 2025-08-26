@@ -126,6 +126,7 @@ namespace MelonLoader.Utils
                     return false;
                 }
 
+                /*
                 if (typeNameStr == "<Module>")
                 {
                     if (type.Fields.Count + type.Methods.Count != 0)
@@ -134,6 +135,7 @@ namespace MelonLoader.Utils
                         return false;
                     }
                 }
+                */
 
                 CountChars(typeNameStr, ref symbolCounts);
             }

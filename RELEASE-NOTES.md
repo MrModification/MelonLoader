@@ -29,6 +29,7 @@
 * Updated Il2CppInterop to 1.5.0-ci.643
 * Fixed an issue with Melon Subfolder toggle being inverted
 * Fixed an issue with Il2CppAssemblyGenerator and File Detection Failures
+* Fixed an issue with Assembly Verifier throwing an error when loading SharpDX
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)
