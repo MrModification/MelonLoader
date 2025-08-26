@@ -69,6 +69,7 @@
 24. Allowed exclamation marks in namespaces/types   (Credits to [Emik03](<https://github.com/Emik03>) :D)
 25. Updated Tomlet to 6.1.0
 26. Updated Pastel to 7.0.0
+27. Updated AssetRipper.Primitives to 3.2.0
 
 ---
 

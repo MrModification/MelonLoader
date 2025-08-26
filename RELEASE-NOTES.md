@@ -25,6 +25,7 @@
 * Allowed exclamation marks in namespaces/types
 * Updated Tomlet to 6.1.0
 * Updated Pastel to 7.0.0
+* Updated AssetRipper.Primitives to 3.2.0
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)
