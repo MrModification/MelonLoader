@@ -24,7 +24,7 @@
 	-->
     <PropertyGroup>
         <IcedVersion>1.21.0</IcedVersion>
-        <TomletVersion>5.4.0</TomletVersion>
+        <TomletVersion>6.1.0</TomletVersion>
         <PastelVersion>6.0.1</PastelVersion>
         <MonoModVersion>22.7.31.1</MonoModVersion>
         <MonoCecilVersion>0.11.6</MonoCecilVersion>

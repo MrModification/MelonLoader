@@ -67,6 +67,7 @@
 22. Updated Cpp2IL to 2022.1.0-pre-release.20
 23. Implemented Il2CppInterop GetFieldDefaultValue Fix
 24. Allowed exclamation marks in namespaces/types   (Credits to [Emik03](<https://github.com/Emik03>) :D)
+25. Updated Tomlet to 6.1.0
 
 ---
 

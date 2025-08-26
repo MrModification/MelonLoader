@@ -23,6 +23,7 @@
 * Updated Cpp2IL to 2022.1.0-pre-release.20
 * Implemented Il2CppInterop GetFieldDefaultValue Fix
 * Allowed exclamation marks in namespaces/types
+* Updated Tomlet to 6.1.0
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)
