@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <TargetFramework>$(DotNetTarget)</TargetFramework>
         <RootNamespace>MelonLoader.Support</RootNamespace>
-        <TargetFramework>net6</TargetFramework>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <OutputPath>$(MLOutDir)/MelonLoader/Dependencies/SupportModules</OutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

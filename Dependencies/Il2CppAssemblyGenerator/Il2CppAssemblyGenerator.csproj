@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <TargetFramework>$(DotNetTarget)</TargetFramework>
         <RootNamespace>MelonLoader.Il2CppAssemblyGenerator</RootNamespace>
-        <TargetFramework>net6</TargetFramework>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
         <OutputPath>$(MLOutDir)/MelonLoader/Dependencies/Il2CppAssemblyGenerator</OutputPath>

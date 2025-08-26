@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <TargetFramework>$(MonoBleedingEdgeTarget)</TargetFramework>
         <RootNamespace>MelonLoader.CompatibilityLayers</RootNamespace>
-        <TargetFramework>net472</TargetFramework>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <OutputPath>$(MLOutDir)/MelonLoader/Dependencies/CompatibilityLayers</OutputPath>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
