@@ -27,6 +27,7 @@
 * Updated Pastel to 7.0.0
 * Updated AssetRipper.Primitives to 3.2.0
 * Updated Il2CppInterop to 1.5.0-ci.643
+* Fixed an issue with Melon Subfolder toggle being inverted
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)

@@ -71,6 +71,7 @@
 26. Updated Pastel to 7.0.0
 27. Updated AssetRipper.Primitives to 3.2.0
 28. Updated Il2CppInterop to 1.5.0-ci.643
+29. Fixed an issue with Melon Subfolder toggle being inverted
 
 ---
 

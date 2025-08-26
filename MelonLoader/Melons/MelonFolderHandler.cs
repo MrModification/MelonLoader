@@ -270,7 +270,7 @@ public static class MelonFolderHandler
         ref List<string> pluginDirectories,
         ref List<string> modDirectories)
     {
-        if (!LoaderConfig.Current.Loader.DisableSubFolderLoad)
+        if (LoaderConfig.Current.Loader.DisableSubFolderLoad)
             return;
 
         // Get Directories
