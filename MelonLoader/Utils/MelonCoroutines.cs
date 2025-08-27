@@ -7,7 +7,7 @@ namespace MelonLoader
     public class MelonCoroutines
     {
         private static List<IEnumerator> _queue = new List<IEnumerator>();
-        private static bool _hasProcessed = false;
+        internal static bool _hasProcessed = false;
 
         internal static void ProcessQueue()
         {

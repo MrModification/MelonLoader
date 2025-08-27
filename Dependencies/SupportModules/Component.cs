@@ -21,6 +21,8 @@ namespace MelonLoader.Support
             if (Main.component != null)
                 return;
 
+            MelonCoroutines._hasProcessed = false;
+
             Main.obj = new GameObject();
             DontDestroyOnLoad(Main.obj);
             Main.obj.hideFlags = HideFlags.DontSave;
