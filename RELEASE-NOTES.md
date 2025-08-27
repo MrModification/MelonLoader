@@ -31,6 +31,7 @@
 * Fixed an issue with Il2CppAssemblyGenerator and File Detection Failures
 * Fixed an issue with Assembly Verifier throwing an error when loading SharpDX
 * Fixed an issue with MelonCoroutines attempting to use the Support Module before it is loaded
+* Fixed an issue with MelonCoroutines started from OnApplicationStart running before other MelonCoroutines in the queue
 
 ## New Contributors
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)

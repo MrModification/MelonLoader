@@ -75,6 +75,7 @@
 30. Fixed an issue with Il2CppAssemblyGenerator and File Detection Failures
 31. Fixed an issue with Assembly Verifier throwing an error when loading SharpDX
 32. Fixed an issue with MelonCoroutines attempting to use the Support Module before it is loaded
+33. Fixed an issue with MelonCoroutines started from OnApplicationStart running before other MelonCoroutines in the queue
 
 ---
 

@@ -7,9 +7,11 @@ namespace MelonLoader
     public class MelonCoroutines
     {
         private static List<IEnumerator> _queue = new List<IEnumerator>();
+        private static bool _hasProcessed = false;
 
         internal static void ProcessQueue()
         {
+            _hasProcessed = true;
             if (_queue.Count <= 0)
                 return;
             foreach (var queuedCoroutine in _queue)
@@ -25,7 +27,8 @@ namespace MelonLoader
         /// <returns>An object that can be passed to Stop to stop this coroutine</returns>
         public static object Start(IEnumerator routine)
         {
-            if (SupportModule.Interface == null)
+            if (!_hasProcessed 
+                || (SupportModule.Interface == null))
             {
                 _queue.Add(routine);
                 return routine;
@@ -40,7 +43,8 @@ namespace MelonLoader
         /// <param name="coroutineToken">The coroutine to stop</param>
         public static void Stop(object coroutineToken)
         {
-            if (SupportModule.Interface == null)
+            if (!_hasProcessed
+                || (SupportModule.Interface == null))
             {
                 _queue.Remove(coroutineToken as IEnumerator);
                 return;
