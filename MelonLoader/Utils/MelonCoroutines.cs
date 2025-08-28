@@ -6,18 +6,8 @@ namespace MelonLoader
 {
     public class MelonCoroutines
     {
-        private static List<IEnumerator> _queue = new List<IEnumerator>();
+        internal static List<IEnumerator> _queue = new List<IEnumerator>();
         internal static bool _hasProcessed = false;
-
-        internal static void ProcessQueue()
-        {
-            _hasProcessed = true;
-            if (_queue.Count <= 0)
-                return;
-            foreach (var queuedCoroutine in _queue)
-                Start(queuedCoroutine);
-            _queue.Clear();
-        }
 
         /// <summary>
         /// Start a new coroutine.<br />
