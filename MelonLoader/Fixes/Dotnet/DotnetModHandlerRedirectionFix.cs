@@ -15,7 +15,7 @@ namespace MelonLoader.Fixes.Dotnet
                 Core.HarmonyInstance.Patch(typeof(AssemblyLoadContext).GetMethod("ValidateAssemblyNameWithSimpleName", BindingFlags.Static | BindingFlags.NonPublic),
                     new HarmonyMethod(typeof(DotnetModHandlerRedirectionFix), nameof(PreValidateAssembly)));
             }
-            catch (Exception ex) { MelonLogger.Warning($"DotnetModHandlerRedirectionFix Exception: {ex}"); }
+            catch (Exception ex) { MelonLogger.Warning(ex); }
         }
 
         public static bool PreValidateAssembly(Assembly assembly, string requestedSimpleName, ref Assembly __result)

@@ -20,7 +20,7 @@ public class NativeLibraryFix
                     [typeof(string), typeof(Assembly), typeof(DllImportSearchPath?)]),
                 AccessTools.Method(typeof(NativeLibraryFix), nameof(LoadLibrary)).ToNewHarmonyMethod());
         }
-        catch (Exception ex) { MelonLogger.Warning($"NativeLibraryFix Exception: {ex}"); }
+        catch (Exception ex) { MelonLogger.Error(ex); }
     }
 
     private static bool LoadLibrary(ref string __0, Assembly __1, DllImportSearchPath? __2)

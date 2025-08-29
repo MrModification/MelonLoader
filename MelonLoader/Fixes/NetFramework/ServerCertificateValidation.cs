@@ -31,7 +31,7 @@ namespace MelonLoader.Fixes.NetFramework
 
                 ServicePointManager.ServerCertificateValidationCallback += CertificateValidation;
             }
-            catch (Exception ex) { MelonLogger.Warning($"ServerCertificateValidation Exception: {ex}"); }
+            catch (Exception ex) { MelonLogger.Warning(ex); }
         }
         
         // Based on: https://stackoverflow.com/questions/43457050/error-getting-response-stream-write-the-authentication-or-decryption-has-faile

@@ -10,21 +10,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
 {
     internal class Il2CppInteropMacFix
     {
-        private static MelonLogger.Instance _logger = new("Il2CppInterop");
-
-        private static void LogMsg(string msg)
-            => _logger.Msg(msg);
-        private static void LogError(Exception ex)
-            => _logger.Error(ex);
-        private static void LogError(string msg, Exception ex)
-            => _logger.Error(msg, ex);
-        private static void LogDebugMsg(string msg)
-        {
-            if (!MelonDebug.IsEnabled())
-                return;
-            _logger.Msg(msg);
-        }
-
         internal static void Install()
         {
             try
@@ -36,14 +21,14 @@ namespace MelonLoader.Fixes.Il2CppInterop
                 if (injectorHelpersType == null)
                     throw new Exception("Failed to get InjectorHelpers");
 
-                LogDebugMsg("Patching Il2CppInterop InjectorHelpers.Setup...");
+                MelonDebug.Msg("Patching Il2CppInterop InjectorHelpers.Setup...");
                 Core.HarmonyInstance.Patch(AccessTools.Method(injectorHelpersType, "Setup"),
                     null, null,
                     AccessTools.Method(thisType, nameof(InjectorHelpersSetup_Transpiler)).ToNewHarmonyMethod());
             }
             catch (Exception e)
             {
-                LogError(e);
+                MelonLogger.Error(e);
             }
         }
 

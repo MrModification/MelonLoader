@@ -13,19 +13,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
         private static MethodInfo _reportException;
         private static MethodInfo _reportException_Prefix;
 
-        private static void LogMsg(string msg)
-            => _logger.Msg(msg);
-        private static void LogError(Exception ex)
-            => _logger.Error(ex);
-        private static void LogError(string msg, Exception ex)
-            => _logger.Error(msg, ex);
-        private static void LogDebugMsg(string msg)
-        {
-            if (!MelonDebug.IsEnabled())
-                return;
-            _logger.Msg(msg);
-        }
-
         internal static void Install()
         {
             try
@@ -44,19 +31,19 @@ namespace MelonLoader.Fixes.Il2CppInterop
 
                 _reportException_Prefix = thisType.GetMethod(nameof(ReportException_Prefix), BindingFlags.NonPublic | BindingFlags.Static);
 
-                LogDebugMsg("Patching Il2CppInterop Il2CppDetourMethodPatcher.ReportException...");
+                MelonDebug.Msg("Patching Il2CppInterop Il2CppDetourMethodPatcher.ReportException...");
                 Core.HarmonyInstance.Patch(_reportException,
                     new HarmonyMethod(_reportException_Prefix));
             }
             catch (Exception e)
             {
-                LogError(e);
+                MelonLogger.Warning(e);
             }
         }
 
         private static bool ReportException_Prefix(Exception __0)
         {
-            LogError("During invoking native->managed trampoline", __0);
+            _logger.Error("During invoking native->managed trampoline", __0);
             return false;
         }
     }

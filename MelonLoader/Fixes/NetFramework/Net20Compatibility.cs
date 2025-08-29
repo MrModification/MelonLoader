@@ -13,9 +13,16 @@ namespace MelonLoader.Fixes.NetFramework
             if (Environment.Version.Major != 2)
                 return;
 
-            MelonEvents.OnPreInitialization.Subscribe(OnPreInit, unsubscribeOnFirstInvocation: true);
+            try
+            {
+                MelonEvents.OnPreInitialization.Subscribe(OnPreInit, unsubscribeOnFirstInvocation: true);
 
-            Core.HarmonyInstance.Patch(AccessTools.Constructor(typeof(Regex), [typeof(string), typeof(RegexOptions)]), new(typeof(Net20Compatibility), nameof(RegexCtor)));
+                Core.HarmonyInstance.Patch(AccessTools.Constructor(typeof(Regex), [typeof(string), typeof(RegexOptions)]), new(typeof(Net20Compatibility), nameof(RegexCtor)));
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error(ex);
+            }
         }
 
         private static void OnPreInit()

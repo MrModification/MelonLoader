@@ -37,7 +37,7 @@ namespace MelonLoader.Fixes.Dotnet
                 Core.HarmonyInstance.Patch(AlcQCallLoadFromPath, new HarmonyMethod(typeof(DotnetAssemblyLoadContextFix), nameof(PreAlcLoadFromPath)));
                 Core.HarmonyInstance.Patch(AlcQCallLoadFromStream, new HarmonyMethod(typeof(DotnetAssemblyLoadContextFix), nameof(PreAlcLoadFromStream)));
             }
-            catch (Exception ex) { MelonLogger.Warning($"DotnetAssemblyLoadContextFix Exception: {ex}"); }
+            catch (Exception ex) { MelonLogger.Warning(ex); }
         }
 
         public static bool PreAssemblyLoad(byte[] rawAssembly, byte[] rawSymbolStore, ref Assembly __result)

@@ -30,8 +30,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
     // fixes the rest of: https://github.com/BepInEx/Il2CppInterop/pull/134
     internal unsafe static class Il2CppInteropFixes
     {
-        private static MelonLogger.Instance _logger = new("Il2CppInterop");
-
         private static Dictionary<RewriteGlobalContext, Dictionary<string, AssemblyRewriteContext>> _assemblyLookup = new();
         private static Dictionary<IntPtr, Type> _typeLookup = new();
         private static Dictionary<string, Type> _typeNameLookup = new();
@@ -65,19 +63,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
         private static MethodInfo _rewriteGlobalContext_GetNewAssemblyForOriginal_Prefix;
         private static MethodInfo _rewriteGlobalContext_TryGetNewTypeForOriginal;
         private static MethodInfo _rewriteGlobalContext_TryGetNewTypeForOriginal_Prefix;
-
-        private static void LogMsg(string msg)
-            => _logger.Msg(msg);
-        private static void LogError(Exception ex)
-            => _logger.Error(ex);
-        private static void LogError(string msg, Exception ex)
-            => _logger.Error(msg, ex);
-        private static void LogDebugMsg(string msg)
-        {
-            if (!MelonDebug.IsEnabled())
-                return;
-            _logger.Msg(msg);
-        }
 
         internal static void Install()
         {
@@ -180,58 +165,58 @@ namespace MelonLoader.Fixes.Il2CppInterop
                 _rewriteGlobalContext_TryGetNewTypeForOriginal_Prefix = thisType.GetMethod(nameof(RewriteGlobalContext_TryGetNewTypeForOriginal_Prefix), BindingFlags.NonPublic | BindingFlags.Static);
 
                 /*
-                LogDebugMsg("Patching Il2CppInterop ClassInjector.SystemTypeFromIl2CppType...");
+                MelonDebug.Msg("Patching Il2CppInterop ClassInjector.SystemTypeFromIl2CppType...");
                 Core.HarmonyInstance.Patch(_systemTypeFromIl2CppType,
                     new HarmonyMethod(_systemTypeFromIl2CppType_Prefix), 
                     null,
                     new HarmonyMethod(_systemTypeFromIl2CppType_Transpiler));
                 */
 
-                LogDebugMsg("Patching Il2CppInterop ClassInjector.RegisterTypeInIl2Cpp...");
+                MelonDebug.Msg("Patching Il2CppInterop ClassInjector.RegisterTypeInIl2Cpp...");
                 Core.HarmonyInstance.Patch(_registerTypeInIl2Cpp,
                     null,
                     null,
                     new HarmonyMethod(_registerTypeInIl2Cpp_Transpiler));
 
-                LogDebugMsg("Patching Il2CppInterop ClassInjector.IsTypeSupported...");
+                MelonDebug.Msg("Patching Il2CppInterop ClassInjector.IsTypeSupported...");
                 Core.HarmonyInstance.Patch(_isTypeSupported,
                     null,
                     null,
                     new HarmonyMethod(_isTypeSupported_Transpiler));
 
-                LogDebugMsg("Patching Il2CppInterop ClassInjector.RewriteType...");
+                MelonDebug.Msg("Patching Il2CppInterop ClassInjector.RewriteType...");
                 Core.HarmonyInstance.Patch(_rewriteType,
                     new HarmonyMethod(_rewriteType_Prefix));
 
-                LogDebugMsg("Patching Il2CppInterop ClassInjector.ConvertMethodInfo...");
+                MelonDebug.Msg("Patching Il2CppInterop ClassInjector.ConvertMethodInfo...");
                 Core.HarmonyInstance.Patch(_convertMethodInfo,
                     null,
                     null,
                     new HarmonyMethod(_convertMethodInfo_Transpiler));
 
-                LogDebugMsg("Patching Il2CppInterop ILGeneratorEx.EmitObjectToPointer...");
+                MelonDebug.Msg("Patching Il2CppInterop ILGeneratorEx.EmitObjectToPointer...");
                 Core.HarmonyInstance.Patch(_emitObjectToPointer,
                     new HarmonyMethod(_emitObjectToPointer_Prefix));
 
-                LogDebugMsg("Patching Il2CppInterop RewriteGlobalContext.AddAssemblyContext...");
+                MelonDebug.Msg("Patching Il2CppInterop RewriteGlobalContext.AddAssemblyContext...");
                 Core.HarmonyInstance.Patch(_rewriteGlobalContext_AddAssemblyContext,
                     null, new HarmonyMethod(_rewriteGlobalContext_AddAssemblyContext_Postfix));
 
-                LogDebugMsg("Patching Il2CppInterop RewriteGlobalContext.Dispose...");
+                MelonDebug.Msg("Patching Il2CppInterop RewriteGlobalContext.Dispose...");
                 Core.HarmonyInstance.Patch(_rewriteGlobalContext_Dispose,
                     new HarmonyMethod(_rewriteGlobalContext_Dispose_Prefix));
 
-                LogDebugMsg("Patching Il2CppInterop RewriteGlobalContext.GetNewAssemblyForOriginal...");
+                MelonDebug.Msg("Patching Il2CppInterop RewriteGlobalContext.GetNewAssemblyForOriginal...");
                 Core.HarmonyInstance.Patch(_rewriteGlobalContext_GetNewAssemblyForOriginal,
                     new HarmonyMethod(_rewriteGlobalContext_GetNewAssemblyForOriginal_Prefix));
 
-                LogDebugMsg("Patching Il2CppInterop RewriteGlobalContext.TryGetNewTypeForOriginal...");
+                MelonDebug.Msg("Patching Il2CppInterop RewriteGlobalContext.TryGetNewTypeForOriginal...");
                 Core.HarmonyInstance.Patch(_rewriteGlobalContext_TryGetNewTypeForOriginal,
                     new HarmonyMethod(_rewriteGlobalContext_TryGetNewTypeForOriginal_Prefix));
             }
             catch (Exception e)
             {
-                LogError(e);
+                MelonLogger.Error(e);
             }
         }
 
@@ -338,7 +323,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                 return;
 
             contexts[assemblyName] = __1;
-            //LogDebugMsg($"[RewriteGlobalContext] Added: {assemblyName}");
+            //MelonDebug.Msg($"[RewriteGlobalContext] Added: {assemblyName}");
         }
 
         private static bool RewriteGlobalContext_Dispose_Prefix(RewriteGlobalContext __instance)
@@ -366,7 +351,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
             string assemblyName = __0.Name;
             if (contexts.TryGetValue(assemblyName, out __result))
             {
-                //LogDebugMsg($"[RewriteGlobalContext] Found: {assemblyName}");
+                //MelonDebug.Msg($"[RewriteGlobalContext] Found: {assemblyName}");
                 return false;
             }
 
@@ -377,7 +362,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
 
             if (contexts.TryGetValue(assemblyName, out __result))
             {
-                //LogDebugMsg($"[RewriteGlobalContext] Found: {assemblyName}");
+                //MelonDebug.Msg($"[RewriteGlobalContext] Found: {assemblyName}");
                 return false;
             }
 
@@ -403,7 +388,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
             AssemblyRewriteContext rewriteContext = null;
             if (contexts.TryGetValue(assemblyName, out rewriteContext))
             {
-                //LogDebugMsg($"[RewriteGlobalContext] Found: {assemblyName}");
+                //MelonDebug.Msg($"[RewriteGlobalContext] Found: {assemblyName}");
                 __result = rewriteContext.TryGetContextForOriginalType(__0);
                 return false;
             }
@@ -414,7 +399,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                 assemblyName = $"Il2Cpp{assemblyName}";
             if (contexts.TryGetValue(assemblyName, out rewriteContext))
             {
-                //LogDebugMsg($"[RewriteGlobalContext] Found: {assemblyName}");
+                //MelonDebug.Msg($"[RewriteGlobalContext] Found: {assemblyName}");
                 __result = rewriteContext.TryGetContextForOriginalType(__0);
                 return false;
             }
@@ -497,7 +482,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                     instruction.opcode = OpCodes.Call;
                     instruction.operand = _fixedFindType;
 
-                    LogDebugMsg("Patched Il2CppInterop ClassInjector.SystemTypeFromIl2CppType -> Type.GetType");
+                    MelonDebug.Msg("Patched Il2CppInterop ClassInjector.SystemTypeFromIl2CppType -> Type.GetType");
                 }
 
                 yield return instruction;
@@ -517,7 +502,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                     found = true;
                     instruction.opcode = OpCodes.Call;
                     instruction.operand = _fixedAddTypeToLookup;
-                    LogDebugMsg("Patched Il2CppInterop ClassInjector.RegisterTypeInIl2Cpp -> InjectorHelpers.AddTypeToLookup");
+                    MelonDebug.Msg("Patched Il2CppInterop ClassInjector.RegisterTypeInIl2Cpp -> InjectorHelpers.AddTypeToLookup");
                 }
 
                 if (!found2
@@ -527,7 +512,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                     found2 = true;
                     instruction.opcode = OpCodes.Call;
                     instruction.operand = _fixedFindAbstractMethods;
-                    LogDebugMsg("Patched Il2CppInterop ClassInjector.RegisterTypeInIl2Cpp -> FindAbstractMethods");
+                    MelonDebug.Msg("Patched Il2CppInterop ClassInjector.RegisterTypeInIl2Cpp -> FindAbstractMethods");
                 }
 
                 yield return instruction;
@@ -546,7 +531,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                     found = true;
                     instruction.opcode = OpCodes.Call;
                     instruction.operand = _fixedIsByRef;
-                    LogDebugMsg("Patched Il2CppInterop ClassInjector.ConvertMethodInfo -> Type.IsByRef");
+                    MelonDebug.Msg("Patched Il2CppInterop ClassInjector.ConvertMethodInfo -> Type.IsByRef");
                 }
 
                 yield return instruction;
@@ -564,7 +549,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                     found = true;
                     instruction.opcode = OpCodes.Call;
                     instruction.operand = _fixedIsByRef;
-                    LogDebugMsg("Patched Il2CppInterop ClassInjector.IsTypeSupported -> Type.IsByRef");
+                    MelonDebug.Msg("Patched Il2CppInterop ClassInjector.IsTypeSupported -> Type.IsByRef");
                 }
 
                 yield return instruction;

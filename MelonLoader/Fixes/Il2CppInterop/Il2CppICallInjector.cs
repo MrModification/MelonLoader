@@ -28,14 +28,11 @@ namespace MelonLoader.Fixes.Il2CppInterop
         private static MethodInfo _generateNativeToManagedTrampoline;
 
         private static bool _extendedDebug;
-        private static MelonLogger.Instance _logger;
 
         internal static unsafe void Install()
         {
             try
             {
-                _logger = new MelonLogger.Instance(nameof(Il2CppICallInjector));
-
                 _il2CppDetourMethodPatcher = typeof(HarmonySupport).Assembly.GetType("Il2CppInterop.HarmonySupport.Il2CppDetourMethodPatcher");
                 if (_il2CppDetourMethodPatcher == null)
                     throw new Exception("Failed to get Il2CppDetourMethodPatcher");
@@ -64,7 +61,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
             }
             catch (Exception e)
             {
-                LogDebugWarning(e.ToString());
+                MelonLogger.Error(e);
             }
         }
 
@@ -85,25 +82,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
             }
         }
 
-        private static void LogMsg(string msg)
-            => _logger.Msg(msg);
-        private static void LogError(string msg)
-            => _logger.Error(msg);
-        private static void LogDebugMsg(string msg)
-        {
-            if (!_extendedDebug
-                || !MelonDebug.IsEnabled())
-                return;
-            _logger.Msg(msg);
-        }
-        private static void LogDebugWarning(string msg)
-        {
-            if (!_extendedDebug
-                || !MelonDebug.IsEnabled())
-                return;
-            _logger.Warning(msg);
-        }
-
         private static IntPtr il2cpp_resolve_icall_Detour(IntPtr signature)
         {
             // Convert Pointer to String
@@ -114,7 +92,8 @@ namespace MelonLoader.Fixes.Il2CppInterop
             // Check Cache
             if (_lookup.TryGetValue(signatureStr, out var result))
             {
-                LogDebugMsg($"Resolved {signatureStr} to ICall in Cache");
+                if (_extendedDebug)
+                    MelonDebug.Msg($"Resolved {signatureStr} to ICall in Cache");
                 return result.Item4;
             }
 
@@ -123,7 +102,8 @@ namespace MelonLoader.Fixes.Il2CppInterop
             if (originalResult != IntPtr.Zero)
             {
                 // Cache Original Result
-                LogDebugMsg($"Resolved {signatureStr} to Unity ICall");
+                if (_extendedDebug)
+                    MelonDebug.Msg($"Resolved {signatureStr} to Unity ICall");
                 _lookup[signatureStr] = (null, null, null, originalResult);
                 return originalResult;
             }
@@ -131,23 +111,25 @@ namespace MelonLoader.Fixes.Il2CppInterop
             // Check if Injection is Needed
             if (!ShouldInject(signatureStr, out MethodInfo unityShimMethod))
             {
-                LogDebugWarning($"Unable to find suitable method to inject for {signatureStr}");
+                if (_extendedDebug)
+                    MelonDebug.Error($"Unable to find suitable method to inject for {signatureStr}");
                 return IntPtr.Zero;
             }
 
             // Create Injected Function and Cache Return
-            LogDebugMsg($"Generating Trampoline for {signatureStr}");
+            MelonDebug.Msg($"Generating Trampoline for {signatureStr}");
             var pair = GenerateTrampoline(unityShimMethod);
             if (pair.Item4 == IntPtr.Zero)
             {
-                LogDebugWarning($"Failed to generate trampoline for {signatureStr}");
+                if (_extendedDebug)
+                    MelonDebug.Error($"Failed to generate trampoline for {signatureStr}");
                 return IntPtr.Zero;
             }
 
             // Add New ICall to Il2Cpp Domain
             _lookup[signatureStr] = pair;
             il2cpp_add_internal_call(signature, pair.Item4);
-            LogMsg($"Registered mono icall {signatureStr} in il2cpp domain");
+            MelonLogger.Msg($"Registered mono icall {signatureStr} in il2cpp domain");
 
             // Return New Function Pointer
             return pair.Item4;

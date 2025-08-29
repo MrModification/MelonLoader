@@ -21,17 +21,21 @@ internal static class XTermFix
             // Fix has been applied officially
             return;
 
-        Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:ReadHeader"),
-            new HarmonyMethod(typeof(XTermFix), nameof(ReadHeaderPrefix)));
+        try
+        {
+            Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:ReadHeader"),
+                new HarmonyMethod(typeof(XTermFix), nameof(ReadHeaderPrefix)));
 
-        Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:Get", [AccessTools.TypeByName("System.TermInfoNumbers")
-            ]), transpiler: new HarmonyMethod(typeof(XTermFix), nameof(GetTermInfoNumbersTranspiler)));
+            Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:Get", [AccessTools.TypeByName("System.TermInfoNumbers")
+                ]), transpiler: new HarmonyMethod(typeof(XTermFix), nameof(GetTermInfoNumbersTranspiler)));
 
-        Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:Get", [AccessTools.TypeByName("System.TermInfoStrings")
-            ]), transpiler: new HarmonyMethod(typeof(XTermFix), nameof(GetTermInfoStringsTranspiler)));
+            Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:Get", [AccessTools.TypeByName("System.TermInfoStrings")
+                ]), transpiler: new HarmonyMethod(typeof(XTermFix), nameof(GetTermInfoStringsTranspiler)));
 
-        Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:GetStringBytes", [AccessTools.TypeByName("System.TermInfoStrings")
-            ]), transpiler: new HarmonyMethod(typeof(XTermFix), nameof(GetTermInfoStringsTranspiler)));
+            Core.HarmonyInstance.Patch(AccessTools.Method("System.TermInfoReader:GetStringBytes", [AccessTools.TypeByName("System.TermInfoStrings")
+                ]), transpiler: new HarmonyMethod(typeof(XTermFix), nameof(GetTermInfoStringsTranspiler)));
+        }
+        catch (Exception ex) { MelonLogger.Error(ex); }
     }
 
     private static int GetInt32(byte[] buffer, int offset)

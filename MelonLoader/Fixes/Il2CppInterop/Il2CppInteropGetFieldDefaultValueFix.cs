@@ -12,8 +12,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
     // Herp: This just allows custom signatures to be added to Il2CppInterop's Class::GetFieldDefaultValue Hook
     internal class Il2CppInteropGetFieldDefaultValueFix
     {
-        private static MelonLogger.Instance _logger = new("Il2CppInterop");
-
         private static FieldInfo _s_Signatures;
 
         private static Type _signatureDefinition;
@@ -30,19 +28,6 @@ namespace MelonLoader.Fixes.Il2CppInterop
         private static List<LemonTuple<string, string, int, bool>> _signaturesToAdd = new List<LemonTuple<string, string, int, bool>>
         {
         };
-
-        private static void LogMsg(string msg)
-            => _logger.Msg(msg);
-        private static void LogError(Exception ex)
-            => _logger.Error(ex);
-        private static void LogError(string msg, Exception ex)
-            => _logger.Error(msg, ex);
-        private static void LogDebugMsg(string msg)
-        {
-            if (!MelonDebug.IsEnabled())
-                return;
-            _logger.Msg(msg);
-        }
 
         internal static void Install()
         {
@@ -90,10 +75,10 @@ namespace MelonLoader.Fixes.Il2CppInterop
                 _replacementSigArray = thisType.GetField("_replacementSignatures", BindingFlags.NonPublic | BindingFlags.Static);
                 _findTargetMethod_Transpiler = thisType.GetMethod(nameof(FindTargetMethod_Transpiler), BindingFlags.NonPublic | BindingFlags.Static);
 
-                LogDebugMsg("Getting Class_GetFieldDefaultValue_Hook Signatures...");
+                MelonDebug.Msg("Getting Il2CppInterop Class_GetFieldDefaultValue_Hook Signatures...");
                 GetSignatures();
 
-                LogDebugMsg("Patching Class_GetFieldDefaultValue_Hook.FindTargetMethod...");
+                MelonDebug.Msg("Patching Il2CppInterop Class_GetFieldDefaultValue_Hook.FindTargetMethod...");
                 Core.HarmonyInstance.Patch(_findTargetMethod,
                     null,
                     null,
@@ -101,7 +86,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
             }
             catch (Exception e)
             {
-                LogError(e);
+                MelonLogger.Error(e);
             }
         }
 
@@ -117,7 +102,7 @@ namespace MelonLoader.Fixes.Il2CppInterop
                 {
                     found = true;
                     instruction.operand = _replacementSigArray;
-                    LogDebugMsg("Patched Class_GetFieldDefaultValue_Hook._s_Signatures");
+                    MelonDebug.Msg("Patched Il2CppInterop Class_GetFieldDefaultValue_Hook._s_Signatures");
                 }
 
                 yield return instruction;

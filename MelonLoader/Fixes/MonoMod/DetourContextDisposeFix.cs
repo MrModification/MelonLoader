@@ -17,18 +17,25 @@ namespace MelonLoader.Fixes.MonoMod
 
         internal static void Install()
         {
-            Type detourContextType = typeof(DetourContext);
-            Type thisType = typeof(DetourContextDisposeFix);
+            try
+            {
+                Type detourContextType = typeof(DetourContext);
+                Type thisType = typeof(DetourContextDisposeFix);
 
-            _isDisposed = detourContextType.GetField("IsDisposed", BindingFlags.NonPublic | BindingFlags.Instance);
-            _dispose = detourContextType.GetMethod("Dispose", BindingFlags.Public | BindingFlags.Instance);
-            _disposeTranspiler = thisType.GetMethod(nameof(DetourContext_Dispose_Transpiler), BindingFlags.NonPublic | BindingFlags.Static);
+                _isDisposed = detourContextType.GetField("IsDisposed", BindingFlags.NonPublic | BindingFlags.Instance);
+                _dispose = detourContextType.GetMethod("Dispose", BindingFlags.Public | BindingFlags.Instance);
+                _disposeTranspiler = thisType.GetMethod(nameof(DetourContext_Dispose_Transpiler), BindingFlags.NonPublic | BindingFlags.Static);
 
-            MelonDebug.Msg("Patching MonoMod DetourContext.Dispose...");
-            Core.HarmonyInstance.Patch(_dispose,
-                null,
-                null,
-                new HarmonyMethod(_disposeTranspiler));
+                MelonDebug.Msg("Patching MonoMod DetourContext.Dispose...");
+                Core.HarmonyInstance.Patch(_dispose,
+                    null,
+                    null,
+                    new HarmonyMethod(_disposeTranspiler));
+            }
+            catch (Exception e)
+            {
+                MelonLogger.Warning(e);
+            }
         }
 
         private static IEnumerable<CodeInstruction> DetourContext_Dispose_Transpiler(IEnumerable<CodeInstruction> instructions)
