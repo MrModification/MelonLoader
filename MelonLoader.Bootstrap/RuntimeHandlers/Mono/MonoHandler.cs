@@ -238,7 +238,14 @@ internal static class MonoHandler
         {
             &bootstrapHandle
         };
-        Mono.RuntimeInvoke(initMethod, 0, (void**)initArgs, ref ex);
+        
+        nint returnVal = Mono.RuntimeInvoke(initMethod, 0, (void**)initArgs, ref ex);
+        if (returnVal != 0)
+        {
+            string? monoStr = Mono.MonoStringToString(returnVal);
+            if (monoStr != null)
+                Core.Logger.Error(monoStr);
+        }
 
         if (ex != 0)
         {
