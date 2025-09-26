@@ -140,6 +140,7 @@ namespace MelonLoader
 #if NET6_0_OR_GREATER
 
             Fixes.AsmResolver.AsmResolverUtf8StringConcatFix.Install();
+            Fixes.Il2CppInterop.Il2CppInteropUnmangleMethodNameFix.Install();
 
             Fixes.Il2CppInterop.Il2CppInteropExceptionLog.Install();
 
