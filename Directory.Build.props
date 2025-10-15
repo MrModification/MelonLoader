@@ -4,7 +4,7 @@
 	-->
     <PropertyGroup>
         <Version>0.7.2</Version>
-        <AppHostVersion>9.0.0</AppHostVersion>
+        <AppHostVersion>10.0.0-rc.2.25502.107</AppHostVersion>
 		
         <BootstrapTarget>net9</BootstrapTarget>
 		
@@ -61,7 +61,7 @@
         <MonoCecilVersion>0.10.4</MonoCecilVersion>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">
+    <PropertyGroup Condition="'$(ForceWindows)' != 'true' And '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">
         <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
         <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <PlatformTarget>x64</PlatformTarget>
@@ -80,7 +80,7 @@
         <LibExt>.a</LibExt>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$([MSBuild]::IsOSUnixLike())' == 'false'">
+    <PropertyGroup Condition="'$(ForceWindows)' == 'true' OR '$([MSBuild]::IsOSUnixLike())' == 'false'">
         <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
         <RuntimeIdentifier>win-$(Platform)</RuntimeIdentifier>
         <DefineConstants>$(DefineConstants);WINDOWS</DefineConstants>

@@ -7,7 +7,10 @@
         <PublishAot>true</PublishAot>
         <SelfContained>true</SelfContained>
         <PublishDir>$(MLOutDir)</PublishDir>
-		<DefineConstants>$(DefineConstants);BOOTSTRAP</DefineConstants>
+        <DefineConstants>$(DefineConstants);BOOTSTRAP</DefineConstants>
+
+        <AcceptVSBuildToolsLicense>true</AcceptVSBuildToolsLicense>
+        <XwinArches Condition="'$(XWinArches)' == ''">x86,x86_64</XwinArches>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(RuntimeIdentifier.StartsWith(`linux-`))' == 'true'">
@@ -54,6 +57,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="PublishAotCrossXWin" Version="1.2.0" PrivateAssets="all" />
         <PackageReference Include="Microsoft.NETCore.DotNetAppHost" Version="$(AppHostVersion)" PrivateAssets="All" />
         <PackageReference Include="Pastel" Version="$(PastelVersion)" />
         <PackageReference Include="Samboy063.Tomlet" Version="$(TomletVersion)" />
