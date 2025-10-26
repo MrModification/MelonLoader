@@ -41,9 +41,34 @@ namespace MelonLoader.Bootstrap
             nativeHook = null;
         }
 
+        internal static nint GetSymbol(nint handle, nint symbol)
+        {
+            if ((nativeHook != null) && nativeHook.IsHooked)
+                return nativeHook.Trampoline(handle, symbol);
+
+            string? symbolName = Marshal.PtrToStringAnsi(symbol);
+            if (!string.IsNullOrEmpty(symbolName)
+                && !string.IsNullOrWhiteSpace(symbolName)
+                && NativeFunc.TryGetExport(handle, symbolName, out var export))
+                return export;
+
+            return nint.Zero;
+        }
+
+        internal static nint GetSymbol(nint handle, string symbol)
+        {
+            if ((nativeHook != null) && nativeHook.IsHooked)
+                return nativeHook.Trampoline(handle, Marshal.StringToHGlobalAnsi(symbol));
+
+            if (NativeLibrary.TryGetExport(handle, symbol, out var export))
+                return export;
+
+            return nint.Zero;
+        }
+
         private static nint SymbolDetour(nint handle, nint symbol)
         {
-            nint originalSymbolAddress = nativeHook?.Trampoline(handle, symbol) ?? 0;
+            nint originalSymbolAddress = GetSymbol(handle, symbol);
 
             string? symbolName = Marshal.PtrToStringAnsi(symbol);
             if (string.IsNullOrEmpty(symbolName)
