@@ -26,7 +26,7 @@ namespace MelonLoader.Support
                 {
                     MethodInfo onSceneLoadPrefix = typeof(SceneHandler).GetMethod("OnSceneLoadPrefix", BindingFlags.Static | BindingFlags.NonPublic);
                     Core.HarmonyInstance.Patch(sceneLoaded, new HarmonyMethod(onSceneLoadPrefix));
-                    MelonLogger.Msg($"Hooked into {sceneLoaded.FullDescription()}");
+                    MelonDebug.Msg($"Hooked into {sceneLoaded.FullDescription()}");
                 }
                 catch (Exception ex) { MelonLogger.Error($"SceneManager.sceneLoaded override failed: {ex}"); }
 
@@ -35,7 +35,7 @@ namespace MelonLoader.Support
                 {
                     MethodInfo onSceneUnloadPrefix = typeof(SceneHandler).GetMethod("OnSceneUnloadPrefix", BindingFlags.Static | BindingFlags.NonPublic);
                     Core.HarmonyInstance.Patch(sceneUnloaded, new HarmonyMethod(onSceneUnloadPrefix));
-                    MelonLogger.Msg($"Hooked into {sceneUnloaded.FullDescription()}");
+                    MelonDebug.Msg($"Hooked into {sceneUnloaded.FullDescription()}");
                 }
                 catch (Exception ex) { MelonLogger.Error($"SceneManager.sceneUnloaded override failed: {ex}"); }
         }
