@@ -39,8 +39,20 @@
 * Implemented experimental MonoBleedingEdge Environment Patches behind Loader config option (Default is OFF)
 * Fixed an issue with Harmony Auto-Patching for Plugins and Mods not gracefully failing
 * Implemented Harmony TryPatchAll Extension to MelonUtils
+* Rewrote Il2Cpp Scene Handling to Patch Internal_SceneLoaded and Internal_SceneUnloaded
+* Fixed an issue with Windows Bootstrap not being compilable on Linux
+* Fixed an issue with Compilation Runtime Identifier being overridden by Compiling Operation System
+* Fixed an issue with MelonLogger.MsgPastel not working as intended
+* Fixed an issue with Bootstrap's Runtime Symbol Redirect causing weird Span Marshal crashing
+* Rewrote Bootstrap PLTHooks to utilize NativeHook overrides
+* Reworked Bootstrap NativeFunc to avoid infinite looping resolves
+* Improved Handling of Compatibility Layers and Unity Version Parsing
 
-## New Contributors
+## Contributors
+* [slxdy](<https://github.com/slxdy>) made a contribution in [#939](<https://github.com/LavaGang/MelonLoader/pull/939>)
+* [aldelaro5](<https://github.com/aldelaro5>) made a contribution in [#962](<https://github.com/LavaGang/MelonLoader/pull/962>)
+* [Windows10CE](<https://github.com/Windows10CE>) made a contribution in [#1032](<https://github.com/LavaGang/MelonLoader/pull/1032>)
+* [HAHOOS](<https://github.com/HAHOOS>) made a contribution in [#1041](<https://github.com/LavaGang/MelonLoader/pull/1041>)
 * [Squaduck](<https://github.com/Squaduck>) made their first contribution in [#970](<https://github.com/LavaGang/MelonLoader/pull/970>)
 * [Emik03](<https://github.com/Emik03>) made their first contribution in [#983](<https://github.com/LavaGang/MelonLoader/pull/983>)
 

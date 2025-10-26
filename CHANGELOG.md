@@ -66,7 +66,7 @@
 21. Fixed an issue with Infinite Loops from RottenMelon Instantiation calling MelonAssembly.LoadMelonAssembly
 22. Updated Cpp2IL to 2022.1.0-pre-release.20
 23. Implemented Il2CppInterop GetFieldDefaultValue Fix to allow custom signatures to be added to Il2CppInterop's Class::GetFieldDefaultValue Hook
-24. Allowed exclamation marks in namespaces/types   (Credits to [Emik03](<https://github.com/Emik03>) :D)
+24. Allowed exclamation marks in namespaces/types   (Credits to [Emik03](https://github.com/Emik03) :D)
 25. Updated Tomlet to 6.1.0
 26. Updated Pastel to 7.0.0
 27. Updated AssetRipper.Primitives to 3.2.0
@@ -83,6 +83,14 @@
 38. Implemented experimental MonoBleedingEdge Environment Patches behind Loader config option (Default is OFF)
 39. Fixed an issue with Harmony Auto-Patching for Plugins and Mods not gracefully failing
 40. Implemented Harmony TryPatchAll Extension to MelonUtils
+41. Rewrote Il2Cpp Scene Handling to Patch Internal_SceneLoaded and Internal_SceneUnloaded
+42. Fixed an issue with Windows Bootstrap not being compilable on Linux   (Credits to [Windows10CE](https://github.com/Windows10CE) :D)
+43. Fixed an issue with Compilation Runtime Identifier being overridden by Compiling Operation System
+44. Fixed an issue with MelonLogger.MsgPastel not working as intended   (Credits to [HAHOOS](https://github.com/HAHOOS) :D)
+45. Fixed an issue with Bootstrap's Runtime Symbol Redirect causing weird Span Marshal crashing
+46. Rewrote Bootstrap PLTHooks to utilize NativeHook overrides
+47. Reworked Bootstrap NativeFunc to avoid infinite looping resolves
+48. Improved Handling of Compatibility Layers and Unity Version Parsing
 
 ---
 
