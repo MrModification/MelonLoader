@@ -43,8 +43,8 @@ internal static class UnixPlayerLogsMirroring
 #endif
 
         VfprintfNativeHook = PltNativeHook<VfprintfFn>.RedirectUnityPlayer("vfprintf", Marshal.GetFunctionPointerForDelegate(HookVfprintfDelegate));
-        VfprintfChkNativeHook = PltNativeHook<VfprintfChkFn>.RedirectUnityPlayer("__vfprintf_chk", Marshal.GetFunctionPointerForDelegate(HookVfprintfDelegate));
-        Dup2NativeHook = PltNativeHook<Dup2Fn>.RedirectUnityPlayer("dup2", Marshal.GetFunctionPointerForDelegate(HookVfprintfDelegate));
+        VfprintfChkNativeHook = PltNativeHook<VfprintfChkFn>.RedirectUnityPlayer("__vfprintf_chk", Marshal.GetFunctionPointerForDelegate(HookVfprintfChkDelegate));
+        Dup2NativeHook = PltNativeHook<Dup2Fn>.RedirectUnityPlayer("dup2", Marshal.GetFunctionPointerForDelegate(HookDup2Delegate));
 
         FopenNativeHook?.Attach();
         VfprintfNativeHook?.Attach();
