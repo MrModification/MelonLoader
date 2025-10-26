@@ -41,12 +41,15 @@ namespace MelonLoader.Bootstrap
             nativeHook = null;
         }
 
-        internal static nint GetSymbol(nint handle, nint symbol)
+        internal static nint GetSymbol(nint handle, nint symbolNamePtr)
         {
-            if ((nativeHook != null) && nativeHook.IsHooked)
-                return nativeHook.Trampoline(handle, symbol);
+            if (symbolNamePtr == nint.Zero)
+                return nint.Zero;
 
-            string? symbolName = Marshal.PtrToStringAnsi(symbol);
+            if ((nativeHook != null) && nativeHook.IsHooked)
+                return nativeHook.Trampoline(handle, symbolNamePtr);
+
+            string? symbolName = Marshal.PtrToStringAnsi(symbolNamePtr);
             if (!string.IsNullOrEmpty(symbolName)
                 && !string.IsNullOrWhiteSpace(symbolName)
                 && NativeFunc.TryGetExport(handle, symbolName, out var export))
@@ -55,12 +58,16 @@ namespace MelonLoader.Bootstrap
             return nint.Zero;
         }
 
-        internal static nint GetSymbol(nint handle, string symbol)
+        internal static nint GetSymbol(nint handle, string symbolName)
         {
-            if ((nativeHook != null) && nativeHook.IsHooked)
-                return nativeHook.Trampoline(handle, Marshal.StringToHGlobalAnsi(symbol));
+            if (string.IsNullOrEmpty(symbolName)
+                || string.IsNullOrWhiteSpace(symbolName))
+                return nint.Zero;
 
-            if (NativeLibrary.TryGetExport(handle, symbol, out var export))
+            if ((nativeHook != null) && nativeHook.IsHooked)
+                return nativeHook.Trampoline(handle, Marshal.StringToHGlobalAnsi(symbolName));
+
+            if (NativeLibrary.TryGetExport(handle, symbolName, out var export))
                 return export;
 
             return nint.Zero;
