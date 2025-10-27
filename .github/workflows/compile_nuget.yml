@@ -22,7 +22,7 @@ jobs:
         run: dotnet pack -c Release -p:Platform="x64" -p:Version="${{ inputs.VERSION }}"
 
       - name: Upload NuGet Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: MelonLoader.NuGet
           path: Output/Release/win-x64/MelonLoader/LavaGang.MelonLoader.${{ inputs.VERSION }}.nupkg

@@ -46,7 +46,7 @@ jobs:
           zip -r ../${{ github.repository_owner }}-${{ env.PACKAGE_NAME }}-${{ inputs.VERSION }}.zip ./
 
       - name: Upload Thunderstore Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: MelonLoader.Thunderstore
           path: compiled_release/${{ github.repository_owner }}-${{ env.PACKAGE_NAME }}-${{ inputs.VERSION }}.zip
