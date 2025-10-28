@@ -1,4 +1,4 @@
-## What's Changed
+## What's Changed:
 * Removed Unneeded AsmResolverFix
 * Fixed an issue with Platform Specification being incorrect on Platforms other than Windows
 * Fixed Incorrect BuildInfo Values
@@ -51,7 +51,7 @@
 * Adjusted DotNet handling to initialize more reliably
 * Implemented DotNet HostFXR Path Override config and launch options --melonloader.hostfxr
 
-## Contributors
+## Contributors:
 * [slxdy](<https://github.com/slxdy>) made a contribution in [#939](<https://github.com/LavaGang/MelonLoader/pull/939>)
 * [aldelaro5](<https://github.com/aldelaro5>) made a contribution in [#962](<https://github.com/LavaGang/MelonLoader/pull/962>)
 * [Windows10CE](<https://github.com/Windows10CE>) made a contribution in [#1032](<https://github.com/LavaGang/MelonLoader/pull/1032>)
