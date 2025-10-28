@@ -4,9 +4,9 @@
 * Fixed Incorrect BuildInfo Values
 * Implemented Backwards Compatibility for MelonLoader.BuildInfo to use MelonLoader.Properties.BuildInfo
 * Fixed ColorARGB File Name to match the Class
-* Fixed an issue with capturing stdout / stderr when capture player logs is disabled
+* Fixed an issue with capturing stdout / stderr when capture player logs is disabled   [[#962](<https://github.com/LavaGang/MelonLoader/pull/962>)]
 * Added "." as a starting exclusion for Melon Folders
-* Implemented Exception Logging for Mono Invokes
+* Implemented Exception Logging for Mono Invokes   [[#939](<https://github.com/LavaGang/MelonLoader/pull/939>)]
 * Reimplemented Il2CppInteropFixes
 * Removed broken ClassInjector.SystemTypeFromIl2CppType Il2CppInterop fix
 * Fixed an issue with Melon Attribute checks not gracefully failing when an Exception is Thrown
@@ -15,14 +15,14 @@
 * Reimplemented "manifest.json" Requirement for Recursive Melon Subfolder scanning
 * Implemented Config Options for Subfolder Loading Customization
 * Exposed "MelonFolderHandler" methods for Custom Melon Folder Exclusion
-* Fixed an issue with empty strings in "PATH" Environment Variable causing crashes
+* Fixed an issue with empty strings in "PATH" Environment Variable causing crashes   [[#970](<https://github.com/LavaGang/MelonLoader/pull/970>)]
 * Fixed an issue with exposed Melon Folder Exclusion API not working correctly for Plugins
 * Fixed an issue with Melon Subfolder Parent Context checks using an incorrect ScanType
 * Implemented MelonInfoAttribute.SystemType Validation to prevent infinite loop during Melon Instantiation
 * Fixed an issue with Infinite Loops from RottenMelon Instantiation calling MelonAssembly.LoadMelonAssembly
 * Updated Cpp2IL to 2022.1.0-pre-release.20
 * Implemented Il2CppInterop GetFieldDefaultValue Fix to allow custom signatures to be added to Il2CppInterop's Class::GetFieldDefaultValue Hook
-* Allowed exclamation marks in namespaces/types
+* Allowed exclamation marks in namespaces/types   [[#983](<https://github.com/LavaGang/MelonLoader/pull/983>)]
 * Updated Tomlet to 6.1.0
 * Updated Pastel to 7.0.0
 * Updated AssetRipper.Primitives to 3.2.0
@@ -40,14 +40,14 @@
 * Fixed an issue with Harmony Auto-Patching for Plugins and Mods not gracefully failing
 * Implemented Harmony TryPatchAll Extension to MelonUtils
 * Rewrote Il2Cpp Scene Handling to Patch Internal_SceneLoaded and Internal_SceneUnloaded
-* Fixed an issue with Windows Bootstrap not being compilable on Linux
+* Fixed an issue with Windows Bootstrap not being compilable on Linux   [[#1032](<https://github.com/LavaGang/MelonLoader/pull/1032>)]
 * Fixed an issue with Compilation Runtime Identifier being overridden by Compiling Operation System
-* Fixed an issue with MelonLogger.MsgPastel not working as intended
+* Fixed an issue with MelonLogger.MsgPastel not working as intended   [[#1041](<https://github.com/LavaGang/MelonLoader/pull/1041>)]
 * Fixed an issue with Bootstrap's Runtime Symbol Redirect causing weird Span Marshal crashing
 * Rewrote Bootstrap PLTHooks to utilize NativeHook overrides
 * Reworked Bootstrap NativeFunc to avoid infinite looping resolves
 * Improved Handling of Compatibility Layers and Unity Version Parsing
-* Fixed an issue with Command-Line Parsing sometimes failing
+* Fixed an issue with Command-Line Parsing sometimes failing   [[#1044](<https://github.com/LavaGang/MelonLoader/pull/1044>)]
 * Adjusted DotNet handling to initialize more reliably
 * Implemented DotNet HostFXR Path Override config and launch options --melonloader.hostfxr
 
